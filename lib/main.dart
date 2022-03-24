@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:quizflutterapp/quiz-brain.dart';
 
+QuizBrain quizBrain = QuizBrain();
 void main() => runApp(const Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -34,22 +34,9 @@ class _QuizPageState extends State<QuizPage> {
   //List of widget that shows your score (correct or incorrect)
   List<Widget> scoreKeeper = [];
 
-  //List of questions we need
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
-  ];
-
-  //List of questions answers
-  List<bool> answers = [false, true, true];
-
-  //Counter for the questions, when a button is pressd, the count number increment
-  int questionsCount = 0;
-
   //function for answers
   void getAnswer(int questionsCount) {
-    bool correctAnswer = answers[questionsCount];
+    bool correctAnswer = quizBrain.getQuestionAnswer();
     print(correctAnswer);
     if (correctAnswer == true) {
       scoreKeeper.add(
@@ -68,10 +55,7 @@ class _QuizPageState extends State<QuizPage> {
     }
     setState(
       () {
-        questionsCount++;
-        /*if (questionsCount > 3) {
-          questionsCount = 0;
-        }*/
+        quizBrain.nextQuestion();
         scoreKeeper.last;
       },
     );
@@ -89,7 +73,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionsCount],
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -115,7 +99,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                getAnswer(questionsCount);
+                getAnswer(quizBrain.getQuestionNumber());
               },
             ),
           ),
@@ -136,7 +120,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                getAnswer(questionsCount);
+                getAnswer(quizBrain.getQuestionNumber());
               },
             ),
           ),
