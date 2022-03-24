@@ -26,7 +26,7 @@ class QuizBrain {
         questionAnswer: true),
     Question(questionText: 'A slug\'s blood is green.', questionAnswer: true),
     Question(
-        questionText: 'Buzz Aldrin\'s mother\'s maiden name was \"Moon\".',
+        questionText: 'Buzz Aldrin\'s mother\'s maiden name was "Moon".',
         questionAnswer: true),
     Question(
         questionText: 'It is illegal to pee in the Ocean in Portugal.',
@@ -48,7 +48,7 @@ class QuizBrain {
             'The total surface area of two human lungs is approximately 70 square metres.',
         questionAnswer: true),
     Question(
-        questionText: 'Google was originally called \"Backrub\".',
+        questionText: 'Google was originally called "Backrub".',
         questionAnswer: true),
     Question(
         questionText:

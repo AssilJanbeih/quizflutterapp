@@ -37,7 +37,6 @@ class _QuizPageState extends State<QuizPage> {
   //function for answers
   void getAnswer(int questionsCount) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
-    print(correctAnswer);
     if (correctAnswer == true) {
       scoreKeeper.add(
         const Icon(
