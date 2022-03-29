@@ -35,6 +35,8 @@ class _QuizPageState extends State<QuizPage> {
   //List of widget that shows your score (correct or incorrect)
   List<Widget> scoreKeeper = [];
 
+  //User Score
+  int score = 0;
   //Quiz Brain length
   int length = quizBrain.getListLength();
 
@@ -42,6 +44,7 @@ class _QuizPageState extends State<QuizPage> {
   void getAnswer(bool userAnswer) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
     if (userAnswer == correctAnswer) {
+      score = score + 10;
       scoreKeeper.add(
         const Icon(
           Icons.check,
@@ -63,6 +66,7 @@ class _QuizPageState extends State<QuizPage> {
         } else {
           quizBrain.nextQuestion();
           scoreKeeper.last;
+          score;
         }
       },
     );
@@ -74,6 +78,15 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        Expanded(
+          child: Text(
+            'Score : ' + score.toString(),
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+        ),
         Expanded(
           flex: 5,
           child: Padding(
