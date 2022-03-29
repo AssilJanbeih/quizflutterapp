@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizflutterapp/alertDialog.dart';
 import 'package:quizflutterapp/quiz-brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -34,10 +35,13 @@ class _QuizPageState extends State<QuizPage> {
   //List of widget that shows your score (correct or incorrect)
   List<Widget> scoreKeeper = [];
 
+  //Quiz Brain length
+  int length = quizBrain.getListLength();
+
   //function for answers
-  void getAnswer(int questionsCount) {
+  void getAnswer(bool userAnswer) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
-    if (correctAnswer == true) {
+    if (userAnswer == correctAnswer) {
       scoreKeeper.add(
         const Icon(
           Icons.check,
@@ -54,8 +58,12 @@ class _QuizPageState extends State<QuizPage> {
     }
     setState(
       () {
-        quizBrain.nextQuestion();
-        scoreKeeper.last;
+        if (quizBrain.getQuestionNumber() == length) {
+          showPopUp(context);
+        } else {
+          quizBrain.nextQuestion();
+          scoreKeeper.last;
+        }
       },
     );
   }
@@ -98,7 +106,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                getAnswer(quizBrain.getQuestionNumber());
+                getAnswer(true);
               },
             ),
           ),
@@ -119,7 +127,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                getAnswer(quizBrain.getQuestionNumber());
+                getAnswer(false);
               },
             ),
           ),

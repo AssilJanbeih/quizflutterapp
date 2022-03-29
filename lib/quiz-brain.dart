@@ -66,6 +66,10 @@ class QuizBrain {
     }
   }
 
+  int getListLength() {
+    return _questions.length - 1;
+  }
+
   int getQuestionNumber() {
     return _questionsCount;
   }
